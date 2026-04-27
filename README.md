@@ -7,6 +7,7 @@ A collection of [Claude Code](https://docs.claude.com/en/docs/claude-code) skill
 | Path | Purpose |
 |---|---|
 | [`.claude/skills/tdd/`](.claude/skills/tdd/) | Test-driven development with red-green-refactor. Enforces vertical slicing, names common test smells, includes guidance for legacy code. |
+| [`.claude/skills/interview-to-spec/`](.claude/skills/interview-to-spec/) | Interview the user one branch at a time to draft a `spec/<slug>.md` for the upcoming task — the input step of spec-driven development. |
 
 ## How to use
 
