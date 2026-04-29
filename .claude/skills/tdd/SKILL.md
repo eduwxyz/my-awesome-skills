@@ -65,7 +65,7 @@ Same mistake in miniature: writing one test and reaching inside to "also handle"
 
 ## The cycle
 
-**1. Decide.** List the behaviors to verify in rough order. Confirm scope with whoever cares. This is your queue.
+**1. Decide.** If a `spec/<slug>.md` exists for this task, read it — Behaviors + Acceptance criteria are your queue. Otherwise list the behaviors to verify in rough order with whoever cares.
 
 **2. Smoke run.** Pick the first behavior. Test → fails → minimum code → passes. If this first cycle takes more than 15 minutes, the slice is too big.
 
