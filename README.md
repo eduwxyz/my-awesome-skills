@@ -1,6 +1,18 @@
 # my-awesome-skills
 
+[![Claude Code Plugin Marketplace](https://img.shields.io/badge/Claude%20Code-Plugin%20Marketplace-D97757?style=flat-square&logo=anthropic&logoColor=white)](https://code.claude.com/docs/en/plugin-marketplaces)
+[![Skills](https://img.shields.io/badge/skills-6-D97757?style=flat-square)](#skills)
+
 A spec-driven development pipeline for [Claude Code](https://docs.claude.com/en/docs/claude-code). Refine the spec before you code, let TDD enforce it, verify nothing slipped, then review.
+
+## Install
+
+```
+/plugin marketplace add eduwxyz/my-awesome-skills
+/plugin install sdd-pipeline@my-awesome-skills
+```
+
+Restart Claude Code so the hooks load. See [Installation](#installation) below for updates and useful subsets.
 
 ## Why this approach
 
@@ -67,14 +79,7 @@ Hooks fire mechanically — they're shell scripts on the harness side, not LLM j
 
 ## Installation
 
-This repo is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces). The skills ship together as a single plugin, `sdd-pipeline`.
-
-```
-/plugin marketplace add eduwxyz/my-awesome-skills
-/plugin install sdd-pipeline@my-awesome-skills
-```
-
-**Restart Claude Code** after installing so the hooks load.
+This repo is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces). The skills ship as a single plugin, `sdd-pipeline`. See [Install](#install) above for the commands.
 
 ### Updating
 
