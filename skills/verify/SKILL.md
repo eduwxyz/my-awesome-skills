@@ -5,7 +5,7 @@ hooks:
   Stop:
     - hooks:
         - type: command
-          command: "bash ./hooks/iteration-gate.sh"
+          command: "bash ${CLAUDE_PLUGIN_ROOT}/skills/verify/hooks/iteration-gate.sh"
 ---
 
 # Verify

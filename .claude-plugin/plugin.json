@@ -1,0 +1,9 @@
+{
+  "name": "sdd-pipeline",
+  "description": "Spec-driven development pipeline for Claude Code: interview-to-spec, spec-approach, tdd, verify, diagnose, and a feature orchestrator.",
+  "version": "1.0.0",
+  "author": { "name": "eduwxyz" },
+  "repository": "https://github.com/eduwxyz/my-awesome-skills",
+  "license": "MIT",
+  "keywords": ["sdd", "tdd", "spec-driven", "skills", "pipeline"]
+}

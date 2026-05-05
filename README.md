@@ -67,38 +67,26 @@ Hooks fire mechanically — they're shell scripts on the harness side, not LLM j
 
 ## Installation
 
-Claude Code reads skills from two locations:
+This repo is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces). The skills ship together as a single plugin, `sdd-pipeline`.
 
-- `~/.claude/skills/<name>/` — available to every project on your machine.
-- `<repo>/.claude/skills/<name>/` — committed alongside a specific repo, shared with anyone who clones it.
-
-### Per-user install (recommended)
-
-```bash
-git clone https://github.com/eduwxyz/my-awesome-skills.git
-mkdir -p ~/.claude/skills
-cp -r my-awesome-skills/.claude/skills/* ~/.claude/skills/
+```
+/plugin marketplace add eduwxyz/my-awesome-skills
+/plugin install sdd-pipeline@my-awesome-skills
 ```
 
-**Restart Claude Code** to pick up the skills and their hooks. Hooks load only at session start.
+**Restart Claude Code** after installing so the hooks load.
 
-### Per-repo install
+### Updating
 
-To ship the skills with a specific project so collaborators inherit them on `git clone`:
-
-```bash
-mkdir -p <target-repo>/.claude/skills
-cp -r my-awesome-skills/.claude/skills/tdd <target-repo>/.claude/skills/
-cd <target-repo>
-git add .claude/skills/tdd
-git commit -m "chore: add tdd skill"
+```
+/plugin marketplace update my-awesome-skills
 ```
 
-Repeat for each skill you want to ship.
+Each commit to this repo is treated as a new version (the `version` field is omitted in `marketplace.json`, so the git SHA distinguishes releases).
 
-### Minimum useful subset
+### Useful subsets
 
-You don't need all of them. Useful cores:
+All six skills install together. You don't have to use all of them — Claude Code only activates a skill when its trigger phrasing matches. Common cores:
 
 - **Features only:** `interview-to-spec` + `tdd` + `verify`.
 - **Bugs only:** `diagnose` + `tdd` + `verify`.
@@ -109,15 +97,6 @@ You don't need all of them. Useful cores:
 The first time you invoke `tdd` in a new project, it will create `.claude/tdd/test-command.txt` with the project's test command (one line, e.g. `npm test` or `uv run pytest`). The Stop hook reads this file. Edit it directly to change the command.
 
 `verify` writes `.claude/verify/last-verdict.txt` after each run. Both directories live inside the *target project*, not in `~/.claude/`.
-
-## Updating
-
-```bash
-cd my-awesome-skills && git pull
-cp -r .claude/skills/* ~/.claude/skills/
-```
-
-Restart Claude Code.
 
 ## Skipping the pipeline
 

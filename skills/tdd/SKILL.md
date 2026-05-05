@@ -6,7 +6,7 @@ hooks:
   Stop:
     - hooks:
         - type: command
-          command: "bash ./hooks/end-green.sh"
+          command: "bash ${CLAUDE_PLUGIN_ROOT}/skills/tdd/hooks/end-green.sh"
 ---
 
 # TDD

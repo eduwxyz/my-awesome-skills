@@ -6,7 +6,7 @@ hooks:
     - matcher: "Write"
       hooks:
         - type: command
-          command: "bash ./hooks/spec-integrity.sh"
+          command: "bash ${CLAUDE_PLUGIN_ROOT}/skills/spec-approach/hooks/spec-integrity.sh"
 ---
 
 # Spec Approach
