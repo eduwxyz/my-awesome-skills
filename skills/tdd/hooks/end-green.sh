@@ -2,13 +2,13 @@
 # tdd Stop hook with two responsibilities:
 #
 # (1) Tests must be green. Reads the project's test command from
-#     .claude/tdd/test-command.txt (set up by the tdd skill on its
+#     .agents/tdd/test-command.txt (set up by the tdd skill on its
 #     first run); if the command exits non-zero, blocks the Stop
 #     with the test output as the reason.
 #
 # (2) The `simplify` skill must be invoked once per session after
 #     tests turn green. Tracked via a per-session marker file
-#     (.claude/tdd/simplify-asked-<session_id>). On the first Stop
+#     (.agents/tdd/simplify-asked-<session_id>). On the first Stop
 #     with green tests in a session, writes the marker and blocks
 #     with a prompt to invoke `simplify`. On subsequent Stops, the
 #     marker is present and this gate passes.
@@ -21,7 +21,7 @@ session_id=$(printf '%s' "$input" | jq -r '.session_id // empty')
 
 # === 1. Tests must be green ===
 
-cmd_file=".claude/tdd/test-command.txt"
+cmd_file=".agents/tdd/test-command.txt"
 if [[ -f "$cmd_file" ]]; then
   cmd=$(tr -d '\n' < "$cmd_file")
   if [[ -n "$cmd" ]]; then
@@ -40,9 +40,9 @@ fi
 # === 2. Simplify must have been invoked once this session ===
 
 if [[ -n "$session_id" ]]; then
-  marker=".claude/tdd/simplify-asked-$session_id"
+  marker=".agents/tdd/simplify-asked-$session_id"
   if [[ ! -f "$marker" ]]; then
-    mkdir -p .claude/tdd
+    mkdir -p .agents/tdd
     touch "$marker"
     echo "Tests are green. Before stopping, invoke the \`simplify\` skill on the" >&2
     echo "recent changes to review them for reuse, quality, and efficiency." >&2

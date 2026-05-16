@@ -1,0 +1,11 @@
+{
+  "name": "sdd-pipeline",
+  "version": "1.0.0",
+  "description": "Spec-driven development pipeline for Codex CLI: interview-to-spec, spec-approach, tdd, verify, diagnose, and a feature orchestrator.",
+  "author": { "name": "eduwxyz" },
+  "repository": "https://github.com/eduwxyz/my-awesome-skills",
+  "license": "MIT",
+  "keywords": ["sdd", "tdd", "spec-driven", "skills", "pipeline"],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}

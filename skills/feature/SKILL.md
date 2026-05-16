@@ -31,7 +31,7 @@ You will pass through these stages in order:
 
    If yes, invoke `spec-approach` to append `## Approach` to the spec. If no, skip and move on.
 
-3. **`tdd`** — hand off. Red-green-refactor against the spec's Behaviors + Acceptance criteria. The skill itself ensures `.claude/tdd/test-command.txt` is configured on first run, and its Stop hook will gate on green tests + a pass through `simplify`.
+3. **`tdd`** — hand off. Red-green-refactor against the spec's Behaviors + Acceptance criteria. The skill itself ensures `.agents/tdd/test-command.txt` is configured on first run, and its Stop hook will gate on green tests + a pass through `simplify`.
 
 4. **`verify`** — hand off. Maps every AC to a green test. If gaps exist, the skill auto-iterates with `tdd` until clean. Will not return until the verdict is `Ready`.
 

@@ -1,18 +1,38 @@
 # my-awesome-skills
 
 [![Claude Code Plugin Marketplace](https://img.shields.io/badge/Claude%20Code-Plugin%20Marketplace-D97757?style=flat-square&logo=anthropic&logoColor=white)](https://code.claude.com/docs/en/plugin-marketplaces)
+[![Codex CLI](https://img.shields.io/badge/Codex%20CLI-Plugin-10A37F?style=flat-square&logo=openai&logoColor=white)](https://developers.openai.com/codex/plugins)
 [![Skills](https://img.shields.io/badge/skills-6-D97757?style=flat-square)](#skills)
 
-A spec-driven development pipeline for [Claude Code](https://docs.claude.com/en/docs/claude-code). Refine the spec before you code, let TDD enforce it, verify nothing slipped, then review.
+A spec-driven development pipeline for [Claude Code](https://docs.claude.com/en/docs/claude-code) and [Codex CLI](https://developers.openai.com/codex). Refine the spec before you code, let TDD enforce it, verify nothing slipped, then review.
 
 ## Install
+
+Installation differs by harness. If you use both, install separately for each.
+
+**Claude Code:**
 
 ```
 /plugin marketplace add eduwxyz/my-awesome-skills
 /plugin install sdd-pipeline@my-awesome-skills
 ```
 
-Restart Claude Code so the hooks load. See [Installation](#installation) below for updates and useful subsets.
+Restart Claude Code so the hooks load.
+
+**Codex CLI:**
+
+```
+/plugins
+```
+
+Search for `sdd-pipeline` (or add the repo manually). Hooks are opt-in in Codex — add this to `~/.codex/config.toml` so the TDD/verify gates fire:
+
+```toml
+[features]
+plugin_hooks = true
+```
+
+See [Installation](#installation) below for updates and useful subsets.
 
 ## Why this approach
 
@@ -72,20 +92,24 @@ Hooks live in each skill's frontmatter and activate only when the skill is activ
 | Skill | Hook | Enforces |
 |---|---|---|
 | `spec-approach` | `PreToolUse` on `Write` | Blocks `Write` to an existing `spec/*.md` — forces `Edit` so the WHAT sections written upstream are preserved byte-for-byte |
-| `tdd` | `Stop` | (1) Tests must be green (reads command from `.claude/tdd/test-command.txt`). (2) `simplify` must be invoked once per session before stopping |
-| `verify` | `Stop` | Blocks the turn while `.claude/verify/last-verdict.txt` says `Not ready` — forces iteration through `tdd` until the spec is satisfied |
+| `tdd` | `Stop` | (1) Tests must be green (reads command from `.agents/tdd/test-command.txt`). (2) `simplify` must be invoked once per session before stopping |
+| `verify` | `Stop` | Blocks the turn while `.agents/verify/last-verdict.txt` says `Not ready` — forces iteration through `tdd` until the spec is satisfied |
 
 Hooks fire mechanically — they're shell scripts on the harness side, not LLM judgments — so a skill's rules cannot be ignored even if the model decides to skip a step.
 
 ## Installation
 
-This repo is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces). The skills ship as a single plugin, `sdd-pipeline`. See [Install](#install) above for the commands.
+This repo ships as a single plugin, `sdd-pipeline`, packaged for both [Claude Code marketplaces](https://code.claude.com/docs/en/plugin-marketplaces) (`.claude-plugin/`) and [Codex CLI plugins](https://developers.openai.com/codex/plugins) (`.codex-plugin/`). The `skills/` tree and hook scripts are shared — only the per-tool manifest dotdirs differ. See [Install](#install) above for the commands.
 
 ### Updating
+
+Claude Code:
 
 ```
 /plugin marketplace update my-awesome-skills
 ```
+
+Codex CLI: re-run `/plugins` and update from the marketplace entry.
 
 Each commit to this repo is treated as a new version (the `version` field is omitted in `marketplace.json`, so the git SHA distinguishes releases).
 
@@ -99,9 +123,9 @@ All six skills install together. You don't have to use all of them — Claude Co
 
 ## First-run setup in a project
 
-The first time you invoke `tdd` in a new project, it will create `.claude/tdd/test-command.txt` with the project's test command (one line, e.g. `npm test` or `uv run pytest`). The Stop hook reads this file. Edit it directly to change the command.
+The first time you invoke `tdd` in a new project, it will create `.agents/tdd/test-command.txt` with the project's test command (one line, e.g. `npm test` or `uv run pytest`). The Stop hook reads this file. Edit it directly to change the command.
 
-`verify` writes `.claude/verify/last-verdict.txt` after each run. Both directories live inside the *target project*, not in `~/.claude/`.
+`verify` writes `.agents/verify/last-verdict.txt` after each run. Both directories live inside the *target project*, not in `~/.claude/` or `~/.codex/`. The `.agents/` prefix is tool-neutral so the same state file works regardless of which harness you ran the skill in.
 
 ## Skipping the pipeline
 

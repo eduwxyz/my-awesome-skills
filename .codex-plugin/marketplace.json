@@ -1,0 +1,14 @@
+{
+  "name": "my-awesome-skills",
+  "owner": { "name": "eduwxyz" },
+  "metadata": {
+    "description": "Spec-driven development skills for Codex CLI."
+  },
+  "plugins": [
+    {
+      "name": "sdd-pipeline",
+      "source": "./",
+      "description": "SDD pipeline: interview-to-spec, spec-approach, tdd, verify, diagnose, and a feature orchestrator."
+    }
+  ]
+}

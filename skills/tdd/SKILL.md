@@ -70,7 +70,7 @@ Same mistake in miniature: writing one test and reaching inside to "also handle"
 
 ## Before the cycle — wire up the test command
 
-The Stop hook runs your tests at the end of every turn (green allows the turn to end, red blocks it). It reads the command from `.claude/tdd/test-command.txt` at the project root.
+The Stop hook runs your tests at the end of every turn (green allows the turn to end, red blocks it). It reads the command from `.agents/tdd/test-command.txt` at the project root.
 
 If that file is missing, set it up before starting the cycle:
 
@@ -78,7 +78,7 @@ If that file is missing, set it up before starting the cycle:
 2. Otherwise check `package.json` (`scripts.test`), `pyproject.toml` / `pytest.ini`, `Makefile` (`test:` target), `Cargo.toml`, or analogous config files for the project's stack.
 3. If multiple plausible commands exist (e.g. `test:unit` vs `test:e2e`), ask the user which one to use for TDD.
 
-Once decided, create `.claude/tdd/` if missing and write the command on a single line to `.claude/tdd/test-command.txt`. Confirm with the user the first time.
+Once decided, create `.agents/tdd/` if missing and write the command on a single line to `.agents/tdd/test-command.txt`. Confirm with the user the first time.
 
 The user can edit the file at any time to change the command (e.g. switching from `npm test` to `npm run test:unit`).
 

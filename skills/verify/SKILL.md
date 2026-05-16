@@ -43,9 +43,9 @@ The closing gate of the SDD pipeline. Map every acceptance criterion in the spec
    **Warnings** (surface only, do **not** auto-fix):
    - Tests that don't trace back to any AC or edge case in the spec. They might be intentional extra coverage or scope creep — that's the user's call. Listed in the report; do not affect the verdict.
 
-5. **Confirm green.** Run the project's test command (from `.claude/tdd/test-command.txt` if it exists, otherwise infer it the same way the `tdd` skill does). All tests must pass.
+5. **Confirm green.** Run the project's test command (from `.agents/tdd/test-command.txt` if it exists, otherwise infer it the same way the `tdd` skill does). All tests must pass.
 
-6. **Report and persist the verdict.** Use the format below, and write the one-word verdict to `.claude/verify/last-verdict.txt` (see *Persisting the verdict*).
+6. **Report and persist the verdict.** Use the format below, and write the one-word verdict to `.agents/verify/last-verdict.txt` (see *Persisting the verdict*).
 
 ## Output format
 
@@ -75,7 +75,7 @@ When all blocking gaps are absent and the suite is green, the verdict is **Ready
 
 ## Persisting the verdict
 
-Every run of `verify` ends by writing the one-word verdict to `.claude/verify/last-verdict.txt` (create the directory if missing). The file is a single line, no trailing newline:
+Every run of `verify` ends by writing the one-word verdict to `.agents/verify/last-verdict.txt` (create the directory if missing). The file is a single line, no trailing newline:
 
 - `Ready` — all blocking gaps resolved and the suite is green.
 - `Not ready` — at least one blocking gap remains.

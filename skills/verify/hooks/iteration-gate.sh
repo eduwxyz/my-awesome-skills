@@ -2,12 +2,12 @@
 # Block Stop while verify's last verdict is "Not ready".
 # Forces the iteration: gaps → tdd → re-verify → clean.
 #
-# Reads .claude/verify/last-verdict.txt (written by the verify skill at
+# Reads .agents/verify/last-verdict.txt (written by the verify skill at
 # the end of every run). Single line, either "Ready" or "Not ready".
 #
 # Triggered as a Stop hook from the verify skill frontmatter.
 
-verdict_file=".claude/verify/last-verdict.txt"
+verdict_file=".agents/verify/last-verdict.txt"
 
 # No verdict written yet — verify hasn't run. Don't block.
 if [[ ! -f "$verdict_file" ]]; then

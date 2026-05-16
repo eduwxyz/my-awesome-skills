@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${PLUGIN_ROOT}/skills/tdd/hooks/end-green.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash ${PLUGIN_ROOT}/skills/verify/hooks/iteration-gate.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
